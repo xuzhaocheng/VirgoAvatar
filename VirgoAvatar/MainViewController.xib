@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController">
             <connections>
+                <outlet property="containerView" destination="qlg-eP-49D" id="4nm-Aj-4nm"/>
                 <outlet property="imageView" destination="ozu-e5-ING" id="YH2-DM-RBq"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -15,27 +16,45 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ozu-e5-ING">
-                    <rect key="frame" x="60" y="184" width="200" height="200"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                </imageView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0hW-fe-Fnr">
-                    <rect key="frame" x="236" y="440" width="32" height="30"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qlg-eP-49D">
+                    <rect key="frame" x="110" y="137" width="100" height="100"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="save">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ozu-e5-ING">
+                            <rect key="frame" x="5" y="5" width="90" height="90"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="90" id="LVH-Jo-Gpb"/>
+                                <constraint firstAttribute="height" constant="90" id="b2P-IH-MNa"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="ozu-e5-ING" firstAttribute="leading" secondItem="qlg-eP-49D" secondAttribute="leading" constant="5" id="4L1-nf-qRi"/>
+                        <constraint firstAttribute="width" constant="100" id="KSx-j9-aaI"/>
+                        <constraint firstAttribute="height" constant="100" id="Wzi-Jc-iJ1"/>
+                        <constraint firstItem="ozu-e5-ING" firstAttribute="top" secondItem="qlg-eP-49D" secondAttribute="top" constant="5" id="fOE-nj-iGt"/>
+                    </constraints>
+                </view>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="输入内容" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pQV-Ns-YIi">
+                    <rect key="frame" x="20" y="76" width="280" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
                     <connections>
-                        <action selector="saveToSameraRoll:" destination="-1" eventType="touchUpInside" id="7ZY-qu-cyr"/>
+                        <action selector="textContentChanged:" destination="-1" eventType="editingChanged" id="UQP-0y-KgC"/>
                     </connections>
-                </button>
+                </textField>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="pQV-Ns-YIi" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="76" id="P96-SN-4AH"/>
+                <constraint firstAttribute="centerX" secondItem="qlg-eP-49D" secondAttribute="centerX" id="SZG-Ul-bys"/>
+                <constraint firstItem="qlg-eP-49D" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="137" id="Xsb-mZ-xHR"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
-    <resources>
-        <image name="1.jpg" width="681" height="1024"/>
-    </resources>
 </document>

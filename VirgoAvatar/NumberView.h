@@ -10,4 +10,7 @@
 
 @interface NumberView : UIView
 
+@property (nonatomic, strong) NSString *number;
+
+- (id)initWithMinFrame:(CGRect)minFrame maxFrame:(CGRect)maxFrame;
 @end
