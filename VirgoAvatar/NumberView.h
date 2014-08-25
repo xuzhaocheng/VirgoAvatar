@@ -11,6 +11,7 @@
 @interface NumberView : UIView
 
 @property (nonatomic, strong) NSString *number;
+@property (nonatomic) CGFloat cornerRadius;
 
-- (id)initWithMinFrame:(CGRect)minFrame maxFrame:(CGRect)maxFrame;
+- (id)initWithMinFrame:(CGRect)minFrame maxFrame:(CGRect)maxFrame cornerRadius:(CGFloat)cornerRadius;
 @end
