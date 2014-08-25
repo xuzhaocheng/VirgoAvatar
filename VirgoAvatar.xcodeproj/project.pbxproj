@@ -19,6 +19,10 @@
 		6B58270819AAE111008131E7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B5826F019AAE111008131E7 /* UIKit.framework */; };
 		6B58271019AAE111008131E7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B58270E19AAE111008131E7 /* InfoPlist.strings */; };
 		6B58271219AAE111008131E7 /* VirgoAvatarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B58271119AAE111008131E7 /* VirgoAvatarTests.m */; };
+		6B58271E19AAE130008131E7 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B58271C19AAE130008131E7 /* MainViewController.m */; };
+		6B58271F19AAE130008131E7 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B58271D19AAE130008131E7 /* MainViewController.xib */; };
+		6B58272119AAE194008131E7 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6B58272019AAE194008131E7 /* 1.jpg */; };
+		6B58272419AAE1C9008131E7 /* NumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B58272319AAE1C9008131E7 /* NumberView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +52,12 @@
 		6B58270D19AAE111008131E7 /* VirgoAvatarTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VirgoAvatarTests-Info.plist"; sourceTree = "<group>"; };
 		6B58270F19AAE111008131E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6B58271119AAE111008131E7 /* VirgoAvatarTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VirgoAvatarTests.m; sourceTree = "<group>"; };
+		6B58271B19AAE130008131E7 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		6B58271C19AAE130008131E7 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		6B58271D19AAE130008131E7 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		6B58272019AAE194008131E7 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
+		6B58272219AAE1C9008131E7 /* NumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberView.h; sourceTree = "<group>"; };
+		6B58272319AAE1C9008131E7 /* NumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,7 +119,13 @@
 			children = (
 				6B5826FB19AAE111008131E7 /* AppDelegate.h */,
 				6B5826FC19AAE111008131E7 /* AppDelegate.m */,
+				6B58271B19AAE130008131E7 /* MainViewController.h */,
+				6B58271C19AAE130008131E7 /* MainViewController.m */,
+				6B58271D19AAE130008131E7 /* MainViewController.xib */,
+				6B58272219AAE1C9008131E7 /* NumberView.h */,
+				6B58272319AAE1C9008131E7 /* NumberView.m */,
 				6B5826FE19AAE111008131E7 /* Images.xcassets */,
+				6B58272019AAE194008131E7 /* 1.jpg */,
 				6B5826F319AAE111008131E7 /* Supporting Files */,
 			);
 			path = VirgoAvatar;
@@ -220,6 +236,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B5826F719AAE111008131E7 /* InfoPlist.strings in Resources */,
+				6B58272119AAE194008131E7 /* 1.jpg in Resources */,
+				6B58271F19AAE130008131E7 /* MainViewController.xib in Resources */,
 				6B5826FF19AAE111008131E7 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -240,7 +258,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B5826FD19AAE111008131E7 /* AppDelegate.m in Sources */,
+				6B58271E19AAE130008131E7 /* MainViewController.m in Sources */,
 				6B5826F919AAE111008131E7 /* main.m in Sources */,
+				6B58272419AAE1C9008131E7 /* NumberView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
