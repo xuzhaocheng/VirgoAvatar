@@ -34,9 +34,10 @@
     [super viewDidLoad];
     self.title = @"Virgo Avatar";
     
-    self.pickerButton.layer.cornerRadius = 5.f;
+    self.pickerButton.layer.cornerRadius = 15.f;
     self.pickerButton.layer.masksToBounds = YES;
-    
+    self.pickerButton.layer.borderWidth = 0.2;
+    self.pickerButton.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     
     self.saveButton =  [[UIBarButtonItem alloc] initWithTitle:@"保存"
                                                         style:UIBarButtonItemStylePlain
