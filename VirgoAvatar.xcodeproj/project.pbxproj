@@ -25,6 +25,9 @@
 		6B58272419AAE1C9008131E7 /* NumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B58272319AAE1C9008131E7 /* NumberView.m */; };
 		6BCF02C119B6F7E3004BD356 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6BCF02C319B6F7E3004BD356 /* Localizable.strings */; };
 		6BCF02C919B6FF33004BD356 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BCF02C819B6FF33004BD356 /* MainViewController.xib */; };
+		6BCF02CF19B70424004BD356 /* ImageCropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BCF02CD19B70424004BD356 /* ImageCropViewController.m */; };
+		6BCF02D319B70DE2004BD356 /* ImageViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BCF02D219B70DE2004BD356 /* ImageViewer.m */; };
+		6BCF02D519B74171004BD356 /* ImageCropViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BCF02D419B74171004BD356 /* ImageCropViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +68,11 @@
 		6BCF02BE19B6F487004BD356 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		6BCF02C219B6F7E3004BD356 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		6BCF02C819B6FF33004BD356 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		6BCF02CC19B70424004BD356 /* ImageCropViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCropViewController.h; sourceTree = "<group>"; };
+		6BCF02CD19B70424004BD356 /* ImageCropViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCropViewController.m; sourceTree = "<group>"; };
+		6BCF02D119B70DE2004BD356 /* ImageViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewer.h; sourceTree = "<group>"; };
+		6BCF02D219B70DE2004BD356 /* ImageViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewer.m; sourceTree = "<group>"; };
+		6BCF02D419B74171004BD356 /* ImageCropViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageCropViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,11 +144,8 @@
 			children = (
 				6B5826FB19AAE111008131E7 /* AppDelegate.h */,
 				6B5826FC19AAE111008131E7 /* AppDelegate.m */,
-				6B58271B19AAE130008131E7 /* MainViewController.h */,
-				6B58271C19AAE130008131E7 /* MainViewController.m */,
-				6BCF02C819B6FF33004BD356 /* MainViewController.xib */,
-				6B58272219AAE1C9008131E7 /* NumberView.h */,
-				6B58272319AAE1C9008131E7 /* NumberView.m */,
+				6BCF02CB19B703E3004BD356 /* ViewControllers */,
+				6BCF02CA19B703D5004BD356 /* Views */,
 				6B3D757C19AB6F3700AC1487 /* MBProgressHUD */,
 				6B5826FE19AAE111008131E7 /* Images.xcassets */,
 				6B5826F319AAE111008131E7 /* Supporting Files */,
@@ -176,6 +181,30 @@
 				6B58270E19AAE111008131E7 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6BCF02CA19B703D5004BD356 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6B58272219AAE1C9008131E7 /* NumberView.h */,
+				6B58272319AAE1C9008131E7 /* NumberView.m */,
+				6BCF02D119B70DE2004BD356 /* ImageViewer.h */,
+				6BCF02D219B70DE2004BD356 /* ImageViewer.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		6BCF02CB19B703E3004BD356 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				6B58271B19AAE130008131E7 /* MainViewController.h */,
+				6B58271C19AAE130008131E7 /* MainViewController.m */,
+				6BCF02C819B6FF33004BD356 /* MainViewController.xib */,
+				6BCF02CC19B70424004BD356 /* ImageCropViewController.h */,
+				6BCF02CD19B70424004BD356 /* ImageCropViewController.m */,
+				6BCF02D419B74171004BD356 /* ImageCropViewController.xib */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,6 +288,7 @@
 			files = (
 				6BCF02C119B6F7E3004BD356 /* Localizable.strings in Resources */,
 				6B5826F719AAE111008131E7 /* InfoPlist.strings in Resources */,
+				6BCF02D519B74171004BD356 /* ImageCropViewController.xib in Resources */,
 				6BCF02C919B6FF33004BD356 /* MainViewController.xib in Resources */,
 				6B5826FF19AAE111008131E7 /* Images.xcassets in Resources */,
 				6B3D758119AB72E100AC1487 /* error@2x.png in Resources */,
@@ -282,9 +312,11 @@
 			files = (
 				6B5826FD19AAE111008131E7 /* AppDelegate.m in Sources */,
 				6B58271E19AAE130008131E7 /* MainViewController.m in Sources */,
+				6BCF02CF19B70424004BD356 /* ImageCropViewController.m in Sources */,
 				6B3D757F19AB6F3700AC1487 /* MBProgressHUD.m in Sources */,
 				6B5826F919AAE111008131E7 /* main.m in Sources */,
 				6B58272419AAE1C9008131E7 /* NumberView.m in Sources */,
+				6BCF02D319B70DE2004BD356 /* ImageViewer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,6 +7,7 @@
 //
 
 #import "MainViewController.h"
+#import "ImageCropViewController.h"
 #import "NumberView.h"
 #import "MBProgressHUD.h"
 
@@ -89,29 +90,56 @@
     
 }
 
+- (void)takePhotoFromLibraryAction
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        imagePickerController.delegate = self;
+        imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self presentViewController:imagePickerController animated:YES completion:^{
+                if (self.numberView) {
+                    [self.numberView removeFromSuperview];
+                    self.numberView = nil;
+                }
+            }];
+        });
+        
+    });
+    
+}
+
 #pragma mark - UIImagePickerController delegate
 //选择照片
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    [picker dismissViewControllerAnimated:YES completion:nil];
-    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
-    if (image == nil)
-        image = [info objectForKey:UIImagePickerControllerOriginalImage];
     
-    self.imageView.image = image;
     
-    if (self.imageView.hidden == YES) {
-        self.saveButton.enabled = YES;
-        self.imageView.hidden = NO;
-        self.pickerButton.hidden = YES;
-        if (!self.navigationItem.leftBarButtonItem) {
-            self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Reselect", @"重选")
-                                                                                     style:UIBarButtonItemStylePlain
-                                                                                    target:self
-                                                                                    action:@selector(takePhotoFromLibraryAction)];
-        }
+    [picker dismissViewControllerAnimated:YES completion:^{
+        UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+        if (image == nil)
+            image = [info objectForKey:UIImagePickerControllerOriginalImage];
         
-    }
+        ImageCropViewController *vc = [[ImageCropViewController alloc] init];
+        vc.image = image;
+        [self presentViewController:vc animated:YES completion:nil];
+    }];
+
+//    self.imageView.image = image;
+//    
+//    if (self.imageView.hidden == YES) {
+//        self.saveButton.enabled = YES;
+//        self.imageView.hidden = NO;
+//        self.pickerButton.hidden = YES;
+//        if (!self.navigationItem.leftBarButtonItem) {
+//            self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Reselect", @"重选")
+//                                                                                     style:UIBarButtonItemStylePlain
+//                                                                                    target:self
+//                                                                                    action:@selector(takePhotoFromLibraryAction)];
+//        }
+//        
+//    }
 }
 
 //取消选择
@@ -129,20 +157,6 @@
     self.HUD.labelText = NSLocalizedString(@"Saving", @"保存中...");
     [self.HUD show:YES];
     UIImageWriteToSavedPhotosAlbum([self imageWithView:self.containerView], self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-}
-
-
-- (void)takePhotoFromLibraryAction
-{
-    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-    imagePickerController.delegate = self;
-    imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    [self presentViewController:imagePickerController animated:YES completion:^{
-        if (self.numberView) {
-            [self.numberView removeFromSuperview];
-            self.numberView = nil;
-        }
-    }];
 }
 
 - (IBAction)pickrButtonClicked:(id)sender
