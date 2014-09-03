@@ -61,6 +61,8 @@
 		6B58271D19AAE130008131E7 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		6B58272219AAE1C9008131E7 /* NumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberView.h; sourceTree = "<group>"; };
 		6B58272319AAE1C9008131E7 /* NumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberView.m; sourceTree = "<group>"; };
+		6BCF02BD19B6F487004BD356 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		6BCF02BE19B6F487004BD356 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +236,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				"zh-Hans",
 			);
 			mainGroup = 6B5826E019AAE111008131E7;
 			productRefGroup = 6B5826EA19AAE111008131E7 /* Products */;
@@ -304,6 +307,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6B5826F619AAE111008131E7 /* en */,
+				6BCF02BD19B6F487004BD356 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -312,6 +316,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6B58270F19AAE111008131E7 /* en */,
+				6BCF02BE19B6F487004BD356 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

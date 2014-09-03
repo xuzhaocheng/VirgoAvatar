@@ -39,8 +39,7 @@
     self.pickerButton.layer.borderWidth = 0.2;
     self.pickerButton.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     
-    self.saveButton =  [[UIBarButtonItem alloc] initWithTitle:@"保存"
-                                                        style:UIBarButtonItemStylePlain
+    self.saveButton =  [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
                                                        target:self
                                                        action:@selector(saveToSameraRoll)];
     self.saveButton.enabled = NO;
@@ -74,11 +73,11 @@
     if (!error) {
         self.HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark"]];
         self.HUD.mode = MBProgressHUDModeCustomView;
-        self.HUD.labelText = @"保存成功";
+        self.HUD.labelText = NSLocalizedString(@"Done", @"保存成功");
     } else {
         self.HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"error"]];
         self.HUD.mode = MBProgressHUDModeCustomView;
-        self.HUD.labelText = @"保存失败";
+        self.HUD.labelText = NSLocalizedString(@"Failed", @"保存失败");
     }
     
     [self.HUD hide:YES afterDelay:0.5];
@@ -102,7 +101,7 @@
         self.imageView.hidden = NO;
         self.pickerButton.hidden = YES;
         if (!self.navigationItem.leftBarButtonItem) {
-            self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"重选"
+            self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Reselect", @"重选")
                                                                                      style:UIBarButtonItemStylePlain
                                                                                     target:self
                                                                                     action:@selector(takePhotoFromLibraryAction)];
@@ -123,7 +122,7 @@
 {
     self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:self.HUD];
-    self.HUD.labelText = @"保存中...";
+    self.HUD.labelText = NSLocalizedString(@"Saving", @"保存中...");
     [self.HUD show:YES];
     UIImageWriteToSavedPhotosAlbum([self imageWithView:self.containerView], self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 }
@@ -191,10 +190,10 @@
         return YES;
     }
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"尚未选择图片"
-                                                    message:@"请先选取一张图片"
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Must select ONE photo", @"尚未选择图片")
+                                                    message:NSLocalizedString(@"Please select a photo first", @"请先选取一张图片")
                                                    delegate:nil
-                                          cancelButtonTitle:@"马上去选一张" otherButtonTitles: nil];
+                                          cancelButtonTitle:NSLocalizedString(@"Select a photo right now!", @"马上去选一张") otherButtonTitles: nil];
     [alert show];
     return NO;
 }
