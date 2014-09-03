@@ -39,6 +39,9 @@
 {
     [super viewDidLoad];
     
+    self.scrollView.alwaysBounceHorizontal = YES;
+    self.scrollView.alwaysBounceVertical = YES;
+    
     self.imageView.frame = CGRectMake(0, 0, self.image.size.width, self.image.size.height);
     self.imageView.image = self.image;
     [self.scrollView addSubview:self.imageView];
@@ -46,7 +49,8 @@
     
     
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    self.scrollView.contentSize = CGSizeMake(320, 320)
+//    self.scrollView.contentSize = self.image.size;
+    self.scrollView.contentSize = self.scrollView.bounds.size;
 
     
     [self setMinMaxZoomScale];
@@ -56,6 +60,8 @@
     [self createLayer];
     
 }
+
+
 
 - (CGFloat)topPaddingOfMaskLayer
 {
@@ -129,19 +135,15 @@
 
 - (void)updateContentInsets
 {
-//    if (self.imageView.frame.size.height - kMaskLayerSideLength >= [self topPaddingOfMaskLayer] * 2 ) {
-//        self.scrollView.contentInset = UIEdgeInsetsMake([self topPaddingOfMaskLayer], 0, [self topPaddingOfMaskLayer], 0);
-//        
-//        
-//    } else if (self.imageView.frame.size.height <= kMaskLayerSideLength) {
-//        self.scrollView.contentInset = UIEdgeInsetsZero;
-//    } else {
-//        
-//        self.scrollView.contentInset = UIEdgeInsetsMake( -(self.imageView.frame.size.height - kMaskLayerSideLength) / 2, 0, 0, 0);
-//    
-//    }
-    NSLog(@"content height: %f", self.scrollView.contentSize.height);
-    NSLog(@"inset: %f", self.scrollView.contentInset.top);
+    if (self.imageView.frame.size.height - kMaskLayerSideLength >= [self topPaddingOfMaskLayer] * 2 ) {
+        self.scrollView.contentInset = UIEdgeInsetsMake([self topPaddingOfMaskLayer], 0, [self topPaddingOfMaskLayer], 0);
+        
+    } else if (self.imageView.frame.size.height <= kMaskLayerSideLength) {
+        self.scrollView.contentInset = UIEdgeInsetsZero;
+    } else {
+        self.scrollView.contentSize = self.scrollView.bounds.size;
+        self.scrollView.contentInset = UIEdgeInsetsMake((self.imageView.frame.size.height - kMaskLayerSideLength) / 2, 0, (self.imageView.frame.size.height - kMaskLayerSideLength) / 2, 0);
+    }
 }
 
 
@@ -159,14 +161,14 @@
     NSLog(@"image view size: %f, %f", self.imageView.frame.size.width, self.imageView.frame.size.height);
     
     [self centeredFrame:self.imageView forScrollView:self.scrollView];
-//    [self updateContentInsets];
+    [self updateContentInsets];
 }
 
-- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale
-{
-    [self updateContentInsets];
-	
-}
+//- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale
+//{
+//    [self updateContentInsets];
+//	
+//}
 
 
 @end
