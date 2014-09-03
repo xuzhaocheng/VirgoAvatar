@@ -22,8 +22,9 @@
 		6B58271019AAE111008131E7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B58270E19AAE111008131E7 /* InfoPlist.strings */; };
 		6B58271219AAE111008131E7 /* VirgoAvatarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B58271119AAE111008131E7 /* VirgoAvatarTests.m */; };
 		6B58271E19AAE130008131E7 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B58271C19AAE130008131E7 /* MainViewController.m */; };
-		6B58271F19AAE130008131E7 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B58271D19AAE130008131E7 /* MainViewController.xib */; };
 		6B58272419AAE1C9008131E7 /* NumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B58272319AAE1C9008131E7 /* NumberView.m */; };
+		6BCF02C119B6F7E3004BD356 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6BCF02C319B6F7E3004BD356 /* Localizable.strings */; };
+		6BCF02C919B6FF33004BD356 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BCF02C819B6FF33004BD356 /* MainViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,11 +59,12 @@
 		6B58271119AAE111008131E7 /* VirgoAvatarTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VirgoAvatarTests.m; sourceTree = "<group>"; };
 		6B58271B19AAE130008131E7 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		6B58271C19AAE130008131E7 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
-		6B58271D19AAE130008131E7 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		6B58272219AAE1C9008131E7 /* NumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberView.h; sourceTree = "<group>"; };
 		6B58272319AAE1C9008131E7 /* NumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberView.m; sourceTree = "<group>"; };
 		6BCF02BD19B6F487004BD356 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		6BCF02BE19B6F487004BD356 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		6BCF02C219B6F7E3004BD356 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		6BCF02C819B6FF33004BD356 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,7 +138,7 @@
 				6B5826FC19AAE111008131E7 /* AppDelegate.m */,
 				6B58271B19AAE130008131E7 /* MainViewController.h */,
 				6B58271C19AAE130008131E7 /* MainViewController.m */,
-				6B58271D19AAE130008131E7 /* MainViewController.xib */,
+				6BCF02C819B6FF33004BD356 /* MainViewController.xib */,
 				6B58272219AAE1C9008131E7 /* NumberView.h */,
 				6B58272319AAE1C9008131E7 /* NumberView.m */,
 				6B3D757C19AB6F3700AC1487 /* MBProgressHUD */,
@@ -149,6 +151,7 @@
 		6B5826F319AAE111008131E7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6BCF02C319B6F7E3004BD356 /* Localizable.strings */,
 				6B5826F419AAE111008131E7 /* VirgoAvatar-Info.plist */,
 				6B5826F519AAE111008131E7 /* InfoPlist.strings */,
 				6B5826F819AAE111008131E7 /* main.m */,
@@ -254,8 +257,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BCF02C119B6F7E3004BD356 /* Localizable.strings in Resources */,
 				6B5826F719AAE111008131E7 /* InfoPlist.strings in Resources */,
-				6B58271F19AAE130008131E7 /* MainViewController.xib in Resources */,
+				6BCF02C919B6FF33004BD356 /* MainViewController.xib in Resources */,
 				6B5826FF19AAE111008131E7 /* Images.xcassets in Resources */,
 				6B3D758119AB72E100AC1487 /* error@2x.png in Resources */,
 			);
@@ -319,6 +323,15 @@
 				6BCF02BE19B6F487004BD356 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6BCF02C319B6F7E3004BD356 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6BCF02C219B6F7E3004BD356 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

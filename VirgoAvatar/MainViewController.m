@@ -13,11 +13,12 @@
 #define STANDARD_WIDTH       28
 #define PADDING              1
 
-@interface MainViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate>
+@interface MainViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (weak, nonatomic) IBOutlet UIButton *pickerButton;
+@property (weak, nonatomic) IBOutlet UITextField *textField;
 
 @property (nonatomic, strong) UIBarButtonItem *saveButton;
 @property (nonatomic, strong) NumberView *numberView;
@@ -34,6 +35,9 @@
     [super viewDidLoad];
     self.title = @"Virgo Avatar";
     
+    self.textField.placeholder = NSLocalizedString(@"😙Type somethings", @"点我输入内容");
+    
+    [self.pickerButton setTitle:NSLocalizedString(@"Select Photo", @"从相册选取图片") forState:UIControlStateNormal];
     self.pickerButton.layer.cornerRadius = 15.f;
     self.pickerButton.layer.masksToBounds = YES;
     self.pickerButton.layer.borderWidth = 0.2;
@@ -193,9 +197,18 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Must select ONE photo", @"尚未选择图片")
                                                     message:NSLocalizedString(@"Please select a photo first", @"请先选取一张图片")
                                                    delegate:nil
-                                          cancelButtonTitle:NSLocalizedString(@"Select a photo right now!", @"马上去选一张") otherButtonTitles: nil];
+                                          cancelButtonTitle:NSLocalizedString(@"Cancel", @"取消")
+                                          otherButtonTitles:NSLocalizedString(@"Select", @"马上去选一张"), nil];
+    alert.delegate = self;
     [alert show];
     return NO;
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        [self takePhotoFromLibraryAction];
+    }
 }
 
 

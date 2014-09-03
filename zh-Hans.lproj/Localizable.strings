@@ -1,0 +1,17 @@
+/* 
+  Localizable.strings
+  VirgoAvatar
+
+  Created by xuzhaocheng on 14-9-3.
+  Copyright (c) 2014年 Zhejiang University. All rights reserved.
+*/
+"Reselect" = "重选";
+"Saving..." = "保存中...";
+"Failed" = "保存失败";
+"Done" = "保存成功";
+"Must select ONE photo" = "尚未选择图片";
+"Please select a photo first" = "请先选取一张图片";
+"Select" = "现在就去选";
+"Select Photo" = "从相册选取图片";
+"😙Type somethings" = "😙点我输入内容";
+"Cancel" = "取消";

@@ -1,8 +1,1 @@
 /* Localized versions of Info.plist keys */
-"Reselect" = "重选";
-"Saving..." = "保存中...";
-"Failed" = "保存失败";
-"Done" = "保存成功";
-"Must select ONE photo" = "尚未选择图片";
-"Please select a photo first" = "请先选取一张图片";
-@"Select a photo right now!" = "马上去选一张";
