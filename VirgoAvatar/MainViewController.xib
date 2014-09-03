@@ -9,6 +9,7 @@
                 <outlet property="containerView" destination="qlg-eP-49D" id="4nm-Aj-4nm"/>
                 <outlet property="imageView" destination="ozu-e5-ING" id="YH2-DM-RBq"/>
                 <outlet property="pickerButton" destination="GO2-2j-gaF" id="LDE-Bu-FaY"/>
+                <outlet property="textField" destination="pQV-Ns-YIi" id="NWj-sd-HHJ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
