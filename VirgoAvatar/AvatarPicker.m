@@ -6,12 +6,11 @@
 //  Copyright (c) 2014年 Zhejiang University. All rights reserved.
 //
 
-#import "ImageCropViewController.h"
-#import "ImageViewer.h"
+#import "AvatarPicker.h"
 
 #define kMaskLayerSideLength    320
 
-@interface ImageCropViewController () <UIScrollViewDelegate>
+@interface AvatarPicker () <UIScrollViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -19,7 +18,7 @@
 
 @end
 
-@implementation ImageCropViewController
+@implementation AvatarPicker
 
 - (BOOL)prefersStatusBarHidden
 {
@@ -217,8 +216,8 @@
 	/// Cleanup
 	CGImageRelease(croppedImageRef);
 
-    if ([_delegate respondsToSelector:@selector(imageCropViewController:didGetCroppedImage:)]) {
-        [_delegate imageCropViewController:self didGetCroppedImage:cropped];
+    if ([_delegate respondsToSelector:@selector(avatarPicker:didGetAvatar:)]) {
+        [_delegate avatarPicker:self didGetAvatar:cropped];
     }
 }
 

@@ -7,14 +7,14 @@
 //
 
 #import "MainViewController.h"
-#import "ImageCropViewController.h"
+#import "AvatarPicker.h"
 #import "NumberView.h"
 #import "MBProgressHUD.h"
 
 #define STANDARD_WIDTH       28
 #define PADDING              1
 
-@interface MainViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate>
+@interface MainViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate, AvatarPickerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
@@ -59,6 +59,17 @@
 
 - (void)updateUI
 {
+    if (self.imageView.image && self.imageView.hidden == YES) {
+        self.saveButton.enabled = YES;
+        self.imageView.hidden = NO;
+        self.pickerButton.hidden = YES;
+        if (!self.navigationItem.leftBarButtonItem) {
+            self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Reselect", @"重选")
+                                                                                     style:UIBarButtonItemStylePlain
+                                                                                    target:self
+                                                                                    action:@selector(takePhotoFromLibraryAction)];
+        }
+    }
     CGRect circleRect = CGRectMake(self.containerView.frame.size.width - PADDING - self.numberView.frame.size.width, PADDING, self.numberView.frame.size.width, [self numberViewHeight]);
     self.numberView.frame = circleRect;
 }
@@ -96,50 +107,26 @@
         UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
         imagePickerController.delegate = self;
         imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self presentViewController:imagePickerController animated:YES completion:^{
-                if (self.numberView) {
-                    [self.numberView removeFromSuperview];
-                    self.numberView = nil;
-                }
-            }];
+            [self presentViewController:imagePickerController animated:YES completion:nil];
         });
-        
     });
-    
 }
 
 #pragma mark - UIImagePickerController delegate
 //选择照片
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    
-    
     [picker dismissViewControllerAnimated:YES completion:^{
         UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
         if (image == nil)
             image = [info objectForKey:UIImagePickerControllerOriginalImage];
         
-        ImageCropViewController *vc = [[ImageCropViewController alloc] init];
-        vc.image = image;
-        [self presentViewController:vc animated:YES completion:nil];
+        AvatarPicker *avatarPicker = [[AvatarPicker alloc] init];
+        avatarPicker.delegate = self;
+        avatarPicker.image = image;
+        [self presentViewController:avatarPicker animated:YES completion:nil];
     }];
-
-//    self.imageView.image = image;
-//    
-//    if (self.imageView.hidden == YES) {
-//        self.saveButton.enabled = YES;
-//        self.imageView.hidden = NO;
-//        self.pickerButton.hidden = YES;
-//        if (!self.navigationItem.leftBarButtonItem) {
-//            self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Reselect", @"重选")
-//                                                                                     style:UIBarButtonItemStylePlain
-//                                                                                    target:self
-//                                                                                    action:@selector(takePhotoFromLibraryAction)];
-//        }
-//        
-//    }
 }
 
 //取消选择
@@ -154,7 +141,7 @@
 {
     self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:self.HUD];
-    self.HUD.labelText = NSLocalizedString(@"Saving", @"保存中...");
+    self.HUD.labelText = NSLocalizedString(@"Saving...", @"保存中...");
     [self.HUD show:YES];
     UIImageWriteToSavedPhotosAlbum([self imageWithView:self.containerView], self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 }
@@ -199,6 +186,19 @@
         self.numberView.number = sender.text;
         [self updateUI];
     }
+}
+
+#pragma mark - AvatarPicker delegate
+- (void)avatarPicker:(AvatarPicker *)avatarPicker didGetAvatar:(UIImage *)image
+{
+    self.imageView.image = image;
+    [self updateUI];
+    [self dismissViewController];
+}
+
+- (void)dismissViewController
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - UITextField delegate
