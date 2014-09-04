@@ -8,7 +8,7 @@
 
 #import "AvatarPicker.h"
 
-#define kMaskLayerSideLength    320
+#define kMaskLayerSideLength        ([UIScreen mainScreen].bounds.size.width)
 
 @interface AvatarPicker () <UIScrollViewDelegate>
 
@@ -30,30 +30,30 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     _shouldStatusBarHidden = NO;
     [self.toolbar setBackgroundImage:[UIImage new]
                   forToolbarPosition:UIBarPositionAny
                           barMetrics:UIBarMetricsDefault];
     
+    
     self.scrollView.alwaysBounceHorizontal = YES;
     self.scrollView.alwaysBounceVertical = YES;
-    
+}
+
+- (void)viewDidLayoutSubviews
+{
     self.imageView.frame = CGRectMake(0, 0, self.image.size.width, self.image.size.height);
     self.imageView.image = self.image;
     [self.scrollView addSubview:self.imageView];
     [self.view addSubview:self.scrollView];
     
-    
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-
     [self setMinMaxZoomScale];
     [self centeredFrame:self.imageView forScrollView:self.scrollView];
-    
     [self updateContentSize];
     [self updateContentInsets];
-    
     [self createLayer];
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -102,6 +102,7 @@
     
     
     UIBezierPath *linePath = [UIBezierPath bezierPath];
+    
     [linePath moveToPoint:CGPointMake([self horizontalPaddingOfMaskLayer], [self verticalPaddingOfMaskLayer])];
     [linePath addLineToPoint:CGPointMake([self horizontalPaddingOfMaskLayer] + kMaskLayerSideLength, [self verticalPaddingOfMaskLayer])];
     [linePath addLineToPoint:CGPointMake([self horizontalPaddingOfMaskLayer] + kMaskLayerSideLength, [self verticalPaddingOfMaskLayer] + kMaskLayerSideLength)];
@@ -232,8 +233,6 @@
     
     CGImageRef croppedImageRef = CGImageCreateWithImageInRect(self.image.CGImage, cropRectInImageView);
 	UIImage* cropped = [UIImage imageWithCGImage:croppedImageRef scale:self.imageView.image.scale orientation:UIImageOrientationUp];
-    
-	/// Cleanup
 	CGImageRelease(croppedImageRef);
 
     if ([_delegate respondsToSelector:@selector(avatarPicker:didGetAvatar:)]) {
