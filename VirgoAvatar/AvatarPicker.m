@@ -19,15 +19,21 @@
 @end
 
 @implementation AvatarPicker
-
+{
+    BOOL _shouldStatusBarHidden;
+}
 - (BOOL)prefersStatusBarHidden
 {
-    return YES;
+    return _shouldStatusBarHidden;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _shouldStatusBarHidden = NO;
+    [self.toolbar setBackgroundImage:[UIImage new]
+                  forToolbarPosition:UIBarPositionAny
+                          barMetrics:UIBarMetricsDefault];
     
     self.scrollView.alwaysBounceHorizontal = YES;
     self.scrollView.alwaysBounceVertical = YES;
@@ -48,6 +54,20 @@
     
     [self createLayer];
     
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    _shouldStatusBarHidden = YES;
+    [self setNeedsStatusBarAppearanceUpdate];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    _shouldStatusBarHidden = NO;
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 #pragma mark - Private

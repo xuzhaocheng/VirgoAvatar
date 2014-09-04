@@ -14,6 +14,8 @@
 #define STANDARD_WIDTH       28
 #define PADDING              1
 
+#define UICOLORFROMRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
 @interface MainViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate, AvatarPickerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -34,8 +36,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     self.title = @"vAvatar";
-    
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.navigationController.navigationBar.translucent = NO;
+    self.view.alpha = 0;
     self.textField.placeholder = NSLocalizedString(@"😙Type somethings", @"点我输入内容");
     
     [self.pickerButton setTitle:NSLocalizedString(@"Select Photo", @"从相册选取图片") forState:UIControlStateNormal];
@@ -49,6 +54,22 @@
                                                        action:@selector(saveToSameraRoll)];
     self.saveButton.enabled = NO;
     self.navigationItem.rightBarButtonItem = self.saveButton;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [UIView animateWithDuration:0.4 animations:^{
+        [self.view setAlpha:1];
+    }];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [UIView animateWithDuration:0.2 animations:^{
+        [self.view setAlpha:0];
+    }];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -107,6 +128,7 @@
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        imagePickerController.navigationBar.translucent = NO;
         imagePickerController.delegate = self;
         imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         dispatch_async(dispatch_get_main_queue(), ^{
