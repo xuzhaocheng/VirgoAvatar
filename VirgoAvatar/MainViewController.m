@@ -34,7 +34,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"Virgo Avatar";
+    self.title = @"vAvatar";
     
     self.textField.placeholder = NSLocalizedString(@"😙Type somethings", @"点我输入内容");
     
@@ -59,9 +59,11 @@
 
 - (void)updateUI
 {
-    if (self.imageView.image && self.imageView.hidden == YES) {
+    if (self.imageView.image && self.imageView.alpha == 0) {
+        [UIView animateWithDuration:0.3 animations:^{
+            self.imageView.alpha = 1;
+        }];
         self.saveButton.enabled = YES;
-        self.imageView.hidden = NO;
         self.pickerButton.hidden = YES;
         if (!self.navigationItem.leftBarButtonItem) {
             self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Reselect", @"重选")
