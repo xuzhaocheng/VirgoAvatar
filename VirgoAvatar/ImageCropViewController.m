@@ -9,7 +9,7 @@
 #import "ImageCropViewController.h"
 #import "ImageViewer.h"
 
-#define kMaskLayerSideLength    (self.view.frame.size.width)
+#define kMaskLayerSideLength    320
 
 @interface ImageCropViewController () <UIScrollViewDelegate>
 
@@ -20,15 +20,6 @@
 @end
 
 @implementation ImageCropViewController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (BOOL)prefersStatusBarHidden
 {
@@ -49,30 +40,38 @@
     
     
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-//    self.scrollView.contentSize = self.image.size;
-    self.scrollView.contentSize = self.scrollView.bounds.size;
 
-    
     [self setMinMaxZoomScale];
     [self centeredFrame:self.imageView forScrollView:self.scrollView];
+    
+    [self updateContentSize];
     [self updateContentInsets];
     
     [self createLayer];
     
 }
 
+#pragma mark - Private
 
-
-- (CGFloat)topPaddingOfMaskLayer
+- (CGFloat)verticalPaddingOfMaskLayer
 {
     return (self.view.frame.size.height - self.toolbar.frame.size.height - kMaskLayerSideLength) / 2;
+}
+
+- (CGFloat)horizontalPaddingOfMaskLayer
+{
+    return (self.view.frame.size.width - kMaskLayerSideLength) / 2;
 }
 
 - (void)createLayer
 {
     UIBezierPath *path = [UIBezierPath bezierPathWithRect:self.view.bounds];
-    UIBezierPath *rect = [UIBezierPath bezierPathWithRect:CGRectMake(0, [self topPaddingOfMaskLayer], 320, 320)];
-    [path appendPath:rect];
+    UIBezierPath *avatarFrame = [UIBezierPath bezierPathWithRect:CGRectMake([self horizontalPaddingOfMaskLayer], [self verticalPaddingOfMaskLayer], kMaskLayerSideLength, kMaskLayerSideLength)];
+    [path appendPath:avatarFrame];
+    
+    UIBezierPath *toolbarFrame = [UIBezierPath bezierPathWithRect:self.toolbar.frame];
+    [path appendPath:toolbarFrame];
+    
     [path setUsesEvenOddFillRule:YES];
     
     CAShapeLayer *fillLayer = [CAShapeLayer layer];
@@ -81,6 +80,20 @@
     fillLayer.fillColor = [UIColor blackColor].CGColor;
     fillLayer.opacity = 0.5;
     [self.view.layer addSublayer:fillLayer];
+    
+    
+    UIBezierPath *linePath = [UIBezierPath bezierPath];
+    [linePath moveToPoint:CGPointMake([self horizontalPaddingOfMaskLayer], [self verticalPaddingOfMaskLayer])];
+    [linePath addLineToPoint:CGPointMake([self horizontalPaddingOfMaskLayer] + kMaskLayerSideLength, [self verticalPaddingOfMaskLayer])];
+    [linePath addLineToPoint:CGPointMake([self horizontalPaddingOfMaskLayer] + kMaskLayerSideLength, [self verticalPaddingOfMaskLayer] + kMaskLayerSideLength)];
+    [linePath addLineToPoint:CGPointMake([self horizontalPaddingOfMaskLayer], [self verticalPaddingOfMaskLayer] + kMaskLayerSideLength)];
+    [linePath addLineToPoint:CGPointMake([self horizontalPaddingOfMaskLayer], [self verticalPaddingOfMaskLayer])];
+
+    CAShapeLayer *lineRect = [CAShapeLayer layer];
+    lineRect.path = linePath.CGPath;
+    lineRect.strokeColor = [UIColor whiteColor].CGColor;
+    lineRect.fillColor = [UIColor clearColor].CGColor;
+    [self.view.layer addSublayer:lineRect];
 }
 
 - (void)setMinMaxZoomScale
@@ -133,17 +146,43 @@
         view.frame = frameToCenter;
 }
 
+- (void)updateContentSize
+{
+    CGFloat contentHeight, contentWidth;
+    if (self.imageView.frame.size.height > self.scrollView.frame.size.height) {
+        contentHeight = self.imageView.frame.size.height;
+    } else {
+        contentHeight = self.scrollView.bounds.size.height;
+    }
+    if (self.imageView.frame.size.width > self.scrollView.frame.size.width) {
+        contentWidth = self.imageView.frame.size.width;
+    } else {
+        contentWidth = self.scrollView.bounds.size.width;
+    }
+    self.scrollView.contentSize = CGSizeMake(contentWidth, contentHeight);
+}
+
 - (void)updateContentInsets
 {
-    if (self.imageView.frame.size.height - kMaskLayerSideLength >= [self topPaddingOfMaskLayer] * 2 ) {
-        self.scrollView.contentInset = UIEdgeInsetsMake([self topPaddingOfMaskLayer], 0, [self topPaddingOfMaskLayer], 0);
-        
+    CGFloat insetTop, insetLeft, insetBottom, insetRight;
+   
+    if (self.imageView.frame.size.height - kMaskLayerSideLength >= [self verticalPaddingOfMaskLayer] * 2 ) {
+        insetTop = insetBottom = [self verticalPaddingOfMaskLayer];
     } else if (self.imageView.frame.size.height <= kMaskLayerSideLength) {
-        self.scrollView.contentInset = UIEdgeInsetsZero;
+        insetTop = insetBottom = 0;
     } else {
-        self.scrollView.contentSize = self.scrollView.bounds.size;
-        self.scrollView.contentInset = UIEdgeInsetsMake((self.imageView.frame.size.height - kMaskLayerSideLength) / 2, 0, (self.imageView.frame.size.height - kMaskLayerSideLength) / 2, 0);
+        insetTop = insetBottom = (self.imageView.frame.size.height - kMaskLayerSideLength) / 2;
     }
+    
+    if (self.imageView.frame.size.width - kMaskLayerSideLength >= [self horizontalPaddingOfMaskLayer]) {
+        insetLeft = insetRight = [self horizontalPaddingOfMaskLayer];
+    } else if (self.imageView.frame.size.width <= kMaskLayerSideLength) {
+        insetLeft = insetRight = 0;
+    } else {
+        insetLeft = insetRight = (self.imageView.frame.size.width - kMaskLayerSideLength) / 2;
+    }
+    
+    self.scrollView.contentInset = UIEdgeInsetsMake(insetTop, insetLeft, insetBottom, insetRight);
 }
 
 
@@ -157,18 +196,40 @@
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView
 {
-    NSLog(@"content size: %f, %f", scrollView.contentSize.width, scrollView.contentSize.height);
-    NSLog(@"image view size: %f, %f", self.imageView.frame.size.width, self.imageView.frame.size.height);
-    
     [self centeredFrame:self.imageView forScrollView:self.scrollView];
+    [self updateContentSize];
     [self updateContentInsets];
 }
 
-//- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale
-//{
-//    [self updateContentInsets];
-//	
-//}
+
+- (IBAction)cropAction:(id)sender
+{
+    CGRect cropRect = CGRectMake([self horizontalPaddingOfMaskLayer], [self verticalPaddingOfMaskLayer], kMaskLayerSideLength, kMaskLayerSideLength);
+    CGRect cropRectInImageView = [self.view convertRect:cropRect toView:self.imageView];
+    cropRectInImageView.origin.x /= self.imageView.image.scale;
+    cropRectInImageView.origin.y /= self.imageView.image.scale;
+    cropRectInImageView.size.height /= self.imageView.image.scale;
+    cropRectInImageView.size.width /= self.imageView.image.scale;
+    
+    CGImageRef croppedImageRef = CGImageCreateWithImageInRect(self.image.CGImage, cropRectInImageView);
+	UIImage* cropped = [UIImage imageWithCGImage:croppedImageRef scale:self.imageView.image.scale orientation:UIImageOrientationUp];
+    
+	/// Cleanup
+	CGImageRelease(croppedImageRef);
+
+    if ([_delegate respondsToSelector:@selector(imageCropViewController:didGetCroppedImage:)]) {
+        [_delegate imageCropViewController:self didGetCroppedImage:cropped];
+    }
+}
+
+- (IBAction)cancelAction:(id)sender
+{
+    if ([_delegate respondsToSelector:@selector(dismissViewController)]) {
+        [_delegate dismissViewController];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
 
 
 @end
