@@ -22,10 +22,13 @@
 {
     BOOL _shouldStatusBarHidden;
 }
+
 - (BOOL)prefersStatusBarHidden
 {
     return _shouldStatusBarHidden;
 }
+
+#pragma mark - Life Cycle
 
 - (void)viewDidLoad
 {
@@ -221,6 +224,7 @@
     [self updateContentInsets];
 }
 
+#pragma mark - Handle Actions
 
 - (IBAction)cropAction:(id)sender
 {
