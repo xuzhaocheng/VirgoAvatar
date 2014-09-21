@@ -125,12 +125,18 @@
 - (void)takePhotoFromLibraryAction
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        self.navigationItem.leftBarButtonItem.enabled = NO;
+        self.pickerButton.enabled = NO;
         UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
         imagePickerController.navigationBar.translucent = NO;
         imagePickerController.delegate = self;
         imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self presentViewController:imagePickerController animated:YES completion:nil];
+            [self presentViewController:imagePickerController animated:YES completion:^{
+                self.navigationItem.leftBarButtonItem.enabled = YES;
+                self.pickerButton.enabled = YES;
+            }];
         });
     });
 }
@@ -173,6 +179,10 @@
     [self takePhotoFromLibraryAction];
 }
 
+- (IBAction)textFieldDoneEditing:(id)sender
+{
+    [sender resignFirstResponder];
+}
 
 - (IBAction)textContentChanged:(UITextField *)sender
 {

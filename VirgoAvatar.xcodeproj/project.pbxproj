@@ -26,7 +26,6 @@
 		6BCF02C119B6F7E3004BD356 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6BCF02C319B6F7E3004BD356 /* Localizable.strings */; };
 		6BCF02C919B6FF33004BD356 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BCF02C819B6FF33004BD356 /* MainViewController.xib */; };
 		6BCF02CF19B70424004BD356 /* AvatarPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BCF02CD19B70424004BD356 /* AvatarPicker.m */; };
-		6BCF02D519B74171004BD356 /* AvatarPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BCF02D419B74171004BD356 /* AvatarPicker.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,7 +68,6 @@
 		6BCF02C819B6FF33004BD356 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		6BCF02CC19B70424004BD356 /* AvatarPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvatarPicker.h; sourceTree = "<group>"; };
 		6BCF02CD19B70424004BD356 /* AvatarPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvatarPicker.m; sourceTree = "<group>"; };
-		6BCF02D419B74171004BD356 /* AvatarPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AvatarPicker.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,7 +195,6 @@
 				6BCF02C819B6FF33004BD356 /* MainViewController.xib */,
 				6BCF02CC19B70424004BD356 /* AvatarPicker.h */,
 				6BCF02CD19B70424004BD356 /* AvatarPicker.m */,
-				6BCF02D419B74171004BD356 /* AvatarPicker.xib */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -283,7 +280,6 @@
 			files = (
 				6BCF02C119B6F7E3004BD356 /* Localizable.strings in Resources */,
 				6B5826F719AAE111008131E7 /* InfoPlist.strings in Resources */,
-				6BCF02D519B74171004BD356 /* AvatarPicker.xib in Resources */,
 				6BCF02C919B6FF33004BD356 /* MainViewController.xib in Resources */,
 				6B5826FF19AAE111008131E7 /* Images.xcassets in Resources */,
 				6B3D758119AB72E100AC1487 /* error@2x.png in Resources */,
@@ -442,14 +438,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: zhao lei (429C4N7X94)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zhao lei (429C4N7X94)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VirgoAvatar/VirgoAvatar-Prefix.pch";
 				INFOPLIST_FILE = "VirgoAvatar/VirgoAvatar-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9e18926d-eaf6-4119-89cc-e1513c30fbc8";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -459,14 +455,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: zhao lei (429C4N7X94)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zhao lei (429C4N7X94)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VirgoAvatar/VirgoAvatar-Prefix.pch";
 				INFOPLIST_FILE = "VirgoAvatar/VirgoAvatar-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9e18926d-eaf6-4119-89cc-e1513c30fbc8";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

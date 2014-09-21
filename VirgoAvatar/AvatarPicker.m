@@ -12,9 +12,9 @@
 
 @interface AvatarPicker () <UIScrollViewDelegate>
 
-@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
+@property (nonatomic, strong) UIScrollView *scrollView;
+@property (strong, nonatomic) UIImageView *imageView;
+@property (strong, nonatomic) UIToolbar *toolbar;
 
 @end
 
@@ -30,26 +30,42 @@
 
 #pragma mark - Life Cycle
 
+- (void)loadView
+{
+    self.view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    
+    self.scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+    self.scrollView.delegate = self;
+    self.scrollView.backgroundColor = [UIColor blackColor];
+    self.scrollView.userInteractionEnabled = YES;
+    self.scrollView.showsHorizontalScrollIndicator = NO;
+    self.scrollView.showsVerticalScrollIndicator = NO;
+    self.scrollView.alwaysBounceHorizontal = YES;
+    self.scrollView.alwaysBounceVertical = YES;
+    [self.view addSubview:self.scrollView];
+    
+    self.toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44)];
+    self.toolbar.tintColor = [UIColor whiteColor];
+    self.toolbar.barTintColor = [UIColor colorWithWhite:0 alpha:0.1];
+    
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(cropAction:)];
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelAction:)];
+    UIBarButtonItem *flexiableButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    self.toolbar.items = @[flexiableButton, doneButton, flexiableButton, flexiableButton, flexiableButton, flexiableButton, flexiableButton, cancelButton, flexiableButton];
+    [self.view insertSubview:self.toolbar aboveSubview:self.scrollView];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     _shouldStatusBarHidden = NO;
-    [self.toolbar setBackgroundImage:[UIImage new]
-                  forToolbarPosition:UIBarPositionAny
-                          barMetrics:UIBarMetricsDefault];
     
-    
-    self.scrollView.alwaysBounceHorizontal = YES;
-    self.scrollView.alwaysBounceVertical = YES;
-}
-
-- (void)viewDidLayoutSubviews
-{
+    self.imageView = [[UIImageView alloc] init];
     self.imageView.frame = CGRectMake(0, 0, self.image.size.width, self.image.size.height);
     self.imageView.image = self.image;
     [self.scrollView addSubview:self.imageView];
-    [self.view addSubview:self.scrollView];
     
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
     [self setMinMaxZoomScale];
@@ -59,9 +75,10 @@
     [self createLayer];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
     _shouldStatusBarHidden = YES;
     [self setNeedsStatusBarAppearanceUpdate];
 }
@@ -77,7 +94,7 @@
 
 - (CGFloat)verticalPaddingOfMaskLayer
 {
-    return (self.view.frame.size.height - self.toolbar.frame.size.height - kMaskLayerSideLength) / 2;
+    return (self.view.frame.size.height - kMaskLayerSideLength) / 2;
 }
 
 - (CGFloat)horizontalPaddingOfMaskLayer
@@ -141,11 +158,10 @@
 	if (xScale >= 1 && yScale >= 1) {
 		minScale = 1.0;
 	}
-    
+
     self.scrollView.maximumZoomScale = maxScale;
-	self.scrollView.minimumZoomScale = minScale;
+    self.scrollView.minimumZoomScale = minScale;
     self.scrollView.zoomScale = self.scrollView.minimumZoomScale;
- 
 }
 
 - (void)centeredFrame:(UIView *)view forScrollView:(UIScrollView *)scrollView
@@ -226,7 +242,7 @@
 
 #pragma mark - Handle Actions
 
-- (IBAction)cropAction:(id)sender
+- (void)cropAction:(id)sender
 {
     CGRect cropRect = CGRectMake([self horizontalPaddingOfMaskLayer], [self verticalPaddingOfMaskLayer], kMaskLayerSideLength, kMaskLayerSideLength);
     CGRect cropRectInImageView = [self.view convertRect:cropRect toView:self.imageView];
@@ -244,7 +260,7 @@
     }
 }
 
-- (IBAction)cancelAction:(id)sender
+- (void)cancelAction:(id)sender
 {
     if ([_delegate respondsToSelector:@selector(dismissViewController)]) {
         [_delegate dismissViewController];
